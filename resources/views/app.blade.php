@@ -14,11 +14,23 @@
     </body>
 </html> --}}
 
+
+
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html dir="RTL" lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="light">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        
+        <style>
+             * {
+            /* HIDE SCROLLBAR */
+            scrollbar-width: none;
+            font-family: "Bahij Mitra", Times, serif;
+            
+        }
+        </style>
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 

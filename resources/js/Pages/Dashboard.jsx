@@ -23,7 +23,6 @@ export default function Dashboard() {
                 </div>
 
             </div>
-            <div className='dark:text-gray-100'>jjj</div>
 
 
         </AuthenticatedLayout>
