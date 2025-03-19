@@ -9,6 +9,8 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './resources/js/**/*.jsx',
+        './resources/js/**/*.js',
+        "./src/**/*.{html,js,jsx,ts,tsx}",
     ],
 
     theme: {
@@ -19,5 +21,12 @@ export default {
         },
     },
 
-    plugins: [forms],
+    plugins: [
+        forms,
+
+        require('daisyui'), // Add this line to enable DaisyUI
+    ],
+    daisyui: {
+        themes: ["light", "dark", "cupcake"], // You can customize or add themes here
+      },
 };

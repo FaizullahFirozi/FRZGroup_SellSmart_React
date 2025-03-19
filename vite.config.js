@@ -10,4 +10,9 @@ export default defineConfig({
         }),
         react(),
     ],
+    resolve: { //add by FRZ
+        alias: {
+            "@" : "/resources/js"
+        },
+    },
 });

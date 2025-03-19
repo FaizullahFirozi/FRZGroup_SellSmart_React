@@ -1,9 +1,12 @@
 import { MoreVertical, ChevronLast, ChevronFirst, WrapTextIcon } from "lucide-react";
 import { useContext, createContext, useState } from "react";
+import {  usePage } from "@inertiajs/react";
 
 const SidebarContext = createContext();
 
 export default function Sidebar({ children }) {
+        const user = usePage().props.auth.user;
+    
     const [expanded, setExpanded] = useState(false); // چی سایډبار بند وی
 
     return (
@@ -44,9 +47,12 @@ export default function Sidebar({ children }) {
                         `}
                     >
                         <div className="leading-4">
-                            <h4 className="font-semibold">John Doe</h4>
+                            <h4 className="font-semibold">
+                                {/* John Doe */}
+                                  {user.name}</h4>
                             <span className="text-xs text-gray-600">
-                                johndoe@gmail.com
+                            {user.email}
+                                {/* johndoe@gmail.com */}
                             </span>
                         </div>
                         <MoreVertical size={20} />

@@ -17,7 +17,7 @@
 
 
 <!DOCTYPE html>
-<html dir="RTL" lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="light">
+<html dir="RTL" lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="light" class="light">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,7 +27,7 @@
              * {
             /* HIDE SCROLLBAR */
             scrollbar-width: none;
-            font-family: "Bahij Mitra", Times, serif;
+            font-family: "Bahij Titr";
             
         }
         </style>

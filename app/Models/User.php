@@ -20,8 +20,12 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'name',
+        'last_name',
+        'companies_id',
         'email',
+        'phone',
         'password',
+        'avatar',
     ];
 
     /**
@@ -30,6 +34,8 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $hidden = [
+        'created_at',
+        'updated_at',
         'password',
         'remember_token',
     ];
@@ -45,5 +51,11 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+    public function companies()
+    {
+        return $this->belongsTo(Company::class, 'companies_id');
     }
 }

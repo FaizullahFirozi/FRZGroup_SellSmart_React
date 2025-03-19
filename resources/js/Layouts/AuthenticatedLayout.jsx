@@ -1,7 +1,7 @@
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
-import { LayoutDashboard, Home, StickyNote, Layers, Flag, Calendar, LifeBuoy, Settings, Baby, ShoppingCart, ChefHat } from "lucide-react";
+import { LayoutDashboard, Home, StickyNote, Layers, Flag, Calendar, LifeBuoy, Settings, Baby, ShoppingCart, ChefHat, Compass } from "lucide-react";
 import Sidebar, { SidebarItem } from "@/components/Sidebar"
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link, usePage } from "@inertiajs/react";
@@ -14,7 +14,7 @@ export default function Authenticated({ header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
-    return (
+    return ( 
         <>
         <div className="flex min-h-screen bg-gray-100 dark:bg-gray-900">
                  <Sidebar>
@@ -34,6 +34,12 @@ export default function Authenticated({ header, children }) {
                             </Link>
                             <Link href={route("profile.edit")}>
                                 <SidebarItem icon={<ChefHat size={20} />} text="Suppliers" active={route().current("profile.edit") } alert={route().current("profile.edit") } />
+                            </Link>
+                            <Link href={route("company")}>
+                                <SidebarItem icon={<Calendar size={20} />} text="کمپني" 
+                                active={["company", "company.add", "company.edit"].some(routeName => route().current(routeName))} 
+                                alert={["company", "company.add", "company.edit"].some(routeName => route().current(routeName))} 
+                           />
                             </Link>
 
 
@@ -101,14 +107,14 @@ export default function Authenticated({ header, children }) {
                                             <Dropdown.Link
                                                 href={route("profile.edit")}
                                             >
-                                                Profile
+                                                پروفایل
                                             </Dropdown.Link>
                                             <Dropdown.Link
                                                 href={route("logout")}
                                                 method="post"
                                                 as="button"
                                             >
-                                                Log Out
+                                                سیسټم بند کول
                                             </Dropdown.Link>
                                         </Dropdown.Content>
                                     </Dropdown>
@@ -185,14 +191,14 @@ export default function Authenticated({ header, children }) {
 
                             <div className="mt-3 space-y-1">
                                 <ResponsiveNavLink href={route("profile.edit")}>
-                                    Profile
+                                    پروفایل
                                 </ResponsiveNavLink>
                                 <ResponsiveNavLink
                                     method="post"
                                     href={route("logout")}
                                     as="button"
                                 >
-                                    Log Out
+                                    وتل
                                 </ResponsiveNavLink>
                             </div>
                         </div>
@@ -201,18 +207,14 @@ export default function Authenticated({ header, children }) {
 
                 {header && (
                     <header className="bg-white shadow dark:bg-gray-800">
-                        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                        <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
                             {header}
                         </div>
                     </header>
                 )}
 
-                <main className="flex-1 p-4">{children}</main>
+                <main className="flex-1 p-2">{children}</main>
             </div>
-       
-
-
-         
         </div>
       </>
     );
