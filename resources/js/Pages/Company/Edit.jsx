@@ -39,6 +39,7 @@ export default function Edit({auth, company}) {
                         Company Name
                     </label>
                     <TextInput
+                        autoFocus={true}    
                         type="text"
                         placeholder="د شرکت نوم ولیکئ"
                         className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"

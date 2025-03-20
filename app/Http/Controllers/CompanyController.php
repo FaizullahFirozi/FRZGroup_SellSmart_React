@@ -15,7 +15,7 @@ class CompanyController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Company::select('id', 'company_name', 'company_address', 'company_phone', 'contact_email', 'company_logo');
+        $query = Company::latest();
 
         if($request->has('company_name') && $request->company_name != '') {
             $query->where('company_name', 'like', '%' . $request->company_name . '%');

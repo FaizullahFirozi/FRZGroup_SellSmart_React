@@ -6,6 +6,7 @@ import Sidebar, { SidebarItem } from "@/components/Sidebar"
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link, usePage } from "@inertiajs/react";
 import { useState } from "react";
+import { BackButton } from "@/Components/BackButton";
 
 
 
@@ -18,7 +19,6 @@ export default function Authenticated({ header, children }) {
         <>
         <div className="flex min-h-screen bg-gray-100 dark:bg-gray-900">
                  <Sidebar>
-                            
                           <br />
                             <SidebarItem icon={<Home size={20} />} text="Home" alert />
                             <Link href={route("dashboard")} >
@@ -204,15 +204,16 @@ export default function Authenticated({ header, children }) {
                         </div>
                     </div>
                 </nav>
-
                 {header && (
                     <header className="bg-white shadow dark:bg-gray-800">
                         <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
                             {header}
                         </div>
+                        
                     </header>
-                )}
+                ) }
 
+                <div className="text-center mt-1"><BackButton /></div>
                 <main className="flex-1 p-2">{children}</main>
             </div>
         </div>

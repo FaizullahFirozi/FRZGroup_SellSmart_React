@@ -3,6 +3,7 @@ import { Head, useForm } from "@inertiajs/react";
 import React, { useState } from "react";
 import TextInput from "@/Components/TextInput";
 import PrimaryButton from "@/Components/PrimaryButton";
+import { BackButton } from "@/Components/BackButton";
 
 export default function Add({ auth }) {
     const { data, setData, post, errors } = useForm({
@@ -38,6 +39,7 @@ export default function Add({ auth }) {
                         Company Name
                     </label>
                     <TextInput
+                        autoFocus={true}
                         type="text"
                         placeholder="د شرکت نوم ولیکئ"
                         className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
@@ -127,15 +129,17 @@ export default function Add({ auth }) {
                         htmlFor="company_logo"
                         className="block text-sm font-medium text-gray-700"
                     >
-                        Company Logo
+                        د شرکت / کمپني لوګو
                     </label>
+                   
                     <TextInput
                         type="file"
-                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                         onChange={(e) =>
                             setData("company_logo", e.target.files[0])
                         }
+                        className="file-input w-full file-input-info"
                     />
+
                     {errors.company_logo && (
                         <div className="text-sm text-red-600 mt-1">
                             {errors.company_logo}
@@ -143,18 +147,17 @@ export default function Add({ auth }) {
                     )}
                 </div>
 
-                <div className="flex justify-end">
-                    <PrimaryButton
-                        className={`px-6 py-2 rounded-md focus:ring-2 focus:ring-offset-2 ${
-                            loading
-                                ? "bg-gray-400 cursor-not-allowed"
-                                : "bg-blue-600 hover:bg-blue-700 text-white"
+                <div className="text-center">
+                    <button
+                        className={`btn ml-5 btn-wide btn-accent btn-outline btn-sm btn-dash rounded-full ${
+                            loading ? "bg-gray-400 cursor-not-allowed" : ""
                         }`}
                         type="submit"
                         disabled={loading} // Disable button when loading
                     >
                         {loading ? "ثبت ..." : "ثبت"}
-                    </PrimaryButton>
+                    </button>
+                    <BackButton className="btn-wide btn-sm btn-error" />
                 </div>
             </form>
         </Authenticated>

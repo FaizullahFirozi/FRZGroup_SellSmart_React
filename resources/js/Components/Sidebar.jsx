@@ -1,6 +1,7 @@
 import { MoreVertical, ChevronLast, ChevronFirst, WrapTextIcon } from "lucide-react";
 import { useContext, createContext, useState } from "react";
 import {  usePage } from "@inertiajs/react";
+import { BackButton } from "./BackButton";
 
 const SidebarContext = createContext();
 
@@ -32,6 +33,7 @@ export default function Sidebar({ children }) {
                     <ul className="flex-1 px-3">{children}</ul>
                 </SidebarContext.Provider>
 
+                <BackButton className="btn text-amber-500" text="‌Back" />
                 <div className="border-t flex p-3">
                     <img
                         src="https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true"

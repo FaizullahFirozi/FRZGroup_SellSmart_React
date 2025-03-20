@@ -2,7 +2,7 @@ import { Button } from "@/Components/Button";
 import Pagination from "@/Components/Pagination";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
-import React, {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 export default function Index({ auth, companies, flash }) {
@@ -17,12 +17,11 @@ export default function Index({ auth, companies, flash }) {
 
     const { data, setData, get } = useForm({
         company_name: "",
-        
+
         page: companies.currentPage,
     });
     const [typingTimeout, setTypingTimeout] = useState(null);
 
-    
     const handleFilterChange = (e) => {
         const { name, value } = e.target;
 
@@ -51,219 +50,22 @@ export default function Index({ auth, companies, flash }) {
             <Head title="Companies" />
             <ToastContainer className={"m-5"} />
             <Link href={route("company.add")}>
-                <Button>شرکت اضافه کړئ</Button>
+                <button className="btn btn-dash btn-secondary rounded-full
+                " >شرکت اضافه کړئ</button>
             </Link>
-            <button className="btn btn-neutral">Neutral</button>
-<button className="btn btn-primary">Primary</button>
-<button className="btn btn-secondary">Secondary</button>
-<button className="btn btn-accent">Accent</button>
-<button className="btn btn-info">Info</button>
-<button className="btn btn-success">Success</button>
-<button className="btn btn-warning">Warning</button>
-<button className="btn btn-error">Error</button>
-
-<button className="btn btn-dash">Default</button>
-<button className="btn btn-dash btn-primary">Primary</button>
-<button className="btn btn-dash btn-secondary">Secondary</button>
-<button className="btn btn-dash btn-accent">Accent</button>
-<button className="btn btn-dash btn-info">Info</button>
-<button className="btn btn-dash btn-success">Success</button>
-<button className="btn btn-dash btn-warning">Warning</button>
-<button className="btn btn-dash btn-error">Error</button>
-<div className="overflow-x-auto">
-  <table className="table">
-    {/* head */}
-    <thead>
-      <tr>
-        <th>
-          <label>
-            <input type="checkbox" className="checkbox" />
-          </label>
-          <input className="input validator" type="email" required placeholder="mail@site.com" />
-<div className="validator-hint">Enter valid email address</div>
-        </th>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      {/* row 1 */}
-      <tr>
-        <th>
-          <label>
-            <input type="checkbox" className="checkbox" />
-          </label>
-        </th>
-        <td>
-          <div className="flex items-center gap-3">
-            <div className="avatar">
-              <div className="mask mask-squircle h-12 w-12">
-                <img
-                  src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                  alt="Avatar Tailwind CSS Component" />
-              </div>
-            </div>
-            <div>
-              <div className="font-bold">Hart Hagerty</div>
-              <div className="text-sm opacity-50">United States</div>
-            </div>
-          </div>
-        </td>
-        <td>
-          Zemlak, Daniel and Leannon
-          <br />
-          <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
-        </td>
-        <td>Purple</td>
-        <th>
-          <button className="btn btn-ghost btn-xs">details</button>
-        </th>
-      </tr>
-      {/* row 2 */}
-      <tr>
-        <th>
-          <label>
-            <input type="checkbox" className="checkbox" />
-          </label>
-        </th>
-        <td>
-          <div className="flex items-center gap-3">
-            <div className="avatar">
-              <div className="mask mask-squircle h-12 w-12">
-                <img
-                  src="https://img.daisyui.com/images/profile/demo/3@94.webp"
-                  alt="Avatar Tailwind CSS Component" />
-              </div>
-            </div>
-            <div>
-              <div className="font-bold">Brice Swyre</div>
-              <div className="text-sm opacity-50">China</div>
-            </div>
-          </div>
-        </td>
-        <td>
-          Carroll Group
-          <br />
-          <span className="badge badge-ghost badge-sm">Tax Accountant</span>
-        </td>
-        <td>Red</td>
-        <th>
-          <button className="btn btn-ghost btn-xs">details</button>
-        </th>
-      </tr>
-      {/* row 3 */}
-      <tr>
-        <th>
-          <label>
-            <input type="checkbox" className="checkbox" />
-          </label>
-        </th>
-        <td>
-          <div className="flex items-center gap-3">
-            <div className="avatar">
-              <div className="mask mask-squircle h-12 w-12">
-                <img
-                  src="https://img.daisyui.com/images/profile/demo/4@94.webp"
-                  alt="Avatar Tailwind CSS Component" />
-              </div>
-            </div>
-            <div>
-              <div className="font-bold">Marjy Ferencz</div>
-              <div className="text-sm opacity-50">Russia</div>
-            </div>
-          </div>
-        </td>
-        <td>
-          Rowe-Schoen
-          <br />
-          <span className="badge badge-ghost badge-sm">Office Assistant I</span>
-        </td>
-        <td>Crimson</td>
-        <th>
-          <button className="btn btn-ghost btn-xs">details</button>
-        </th>
-      </tr>
-      {/* row 4 */}
-      <tr>
-        <th>
-          <label>
-            <input type="checkbox" className="checkbox" />
-          </label>
-        </th>
-        <td>
-          <div className="flex items-center gap-3">
-            <div className="avatar">
-              <div className="mask mask-squircle h-12 w-12">
-                <img
-                  src="https://img.daisyui.com/images/profile/demo/5@94.webp"
-                  alt="Avatar Tailwind CSS Component" />
-              </div>
-            </div>
-            <div>
-              <div className="font-bold">Yancy Tear</div>
-              <div className="text-sm opacity-50">Brazil</div>
-            </div>
-          </div>
-        </td>
-        <td>
-          Wyman-Ledner
-          <br />
-          <span className="badge badge-ghost badge-sm">Community Outreach Specialist</span>
-        </td>
-        <td>Indigo</td>
-        <th>
-          <button className="btn btn-ghost btn-xs">details</button>
-        </th>
-      </tr>
-    </tbody>
-    {/* foot */}
-    <tfoot>
-      <tr>
-        <th></th>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
-        <th></th>
-      </tr>
-    </tfoot>
-  </table>
-</div>
-
-
-            <table className="min-w-full mt-5 border-collapse border border-gray-200 shadow-md">
-                <thead className="bg-gray-300">
-                    <tr>
-                        <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            #
-                        </th>
-                        <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            <label htmlFor="conpany name"> Company name</label>
                             <input
+                                className="input file-input-ghost"
                                 type="text"
                                 name="company_name"
                                 value={data.company_name}
                                 onChange={handleFilterChange}
-                                placeholder="Filter By Company Name"
+                                placeholder="Search Here By Company Name"
                             />
-                        </th>
-                        <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            شرکت آدرس
-                        </th>
-                        <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            شرکت د اړیکې شمیره
-                        </th>
-                        <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            شرکت ایمیل آدرس
-                        </th>
-                        <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            شرکت لوګو
-                        </th>
-                        <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            عمومي
-                        </th>
-                    </tr>
+          
+
+            <table className="min-w-full mt-5 border-collapse border border-gray-200 shadow-md">
+                <thead className="bg-gray-300">
+                  
                     <tr>
                         <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
                             #
@@ -310,20 +112,91 @@ export default function Index({ auth, companies, flash }) {
                                 {company.company_email}
                             </td>
                             <td className="border border-gray-300 px-4 py-2">
-                                <img
-                                    src={"storage/" + company.company_logo}
-                                    style={{ width: "80px" }}
-                                    alt="img"
-                                    className="h-10 w-10 object-cover"
-                                />
+                                <div className="avatar hover:cursor-pointer hover:opacity-80">
+                                    <div className="ring-info text-center ring-offset-base-100 w-14 rounded-full ring ring-offset-2">
+                                        <img
+                                            onClick={() =>
+                                                document
+                                                    .getElementById(
+                                                        `modal_${company.id}`
+                                                    ) // Use a unique id for each modal
+                                                    .showModal()
+                                            }
+                                            alt="Logo"
+                                            src={
+                                                "storage/" +
+                                                company.company_logo
+                                            }
+                                        />
+                                        
+                                    </div>
+                                </div>
+                               
+                                <dialog
+                                    id={`modal_${company.id}`}
+                                    className="modal"
+                                >
+                                    {" "}
+                                    {/* Unique id */}
+                                    <div className="modal-box ">
+                                        <img
+                                            alt="Company Logo"
+                                            src={
+                                                "storage/" +
+                                                company.company_logo
+                                            }
+                                        />
+                                    </div>
+                                    <form
+                                        method="dialog"
+                                        className="modal-backdrop"
+                                    >
+                                        <button>close</button>
+                                    </form>
+                                </dialog>
                             </td>
                             <td className="border border-gray-300 px-4 py-2">
-                                <Link href={"company/edit/" + company.id}>
-                                    {" "}
-                                    Edit{" "}
+                                <Link href={route("company.edit", company.id)}>
+                                    <button className="btn btn-xs rounded-full  btn-soft btn-accent btn-wide">
+                                        Edit
+                                    </button>
                                 </Link>
-                                {/* <Link href={route("company.edit", company.id)}> Edit </Link> */}
+                                <button
+                                    onClick={() =>
+                                        document
+                                            .getElementById("MyModal")
+                                            .showModal()
+                                    }
+                                    className="btn btn-xs rounded-full  btn-dash btn-warning btn-wide"
+                                >
+                                    Show
+                                </button>
+                                <Link href={route("company.edit", company.id)}>
+                                    <button className="btn btn-xs rounded-full  btn-soft btn-secondary btn-wide">
+                                        Delete
+                                    </button>
+                                </Link>
                             </td>
+                            <dialog id="MyModal" className="modal">
+                                <div className="modal-box">
+                                    <form method="dialog">
+                                        {/* if there is a button in form, it will close the modal */}
+                                        <button className="btn btn-sm btn-circle hover:text-red-600 btn-ghost absolute left-2 top-2">
+                                            ✕
+                                        </button>
+                                    </form>
+                                    <h3 className="font-bold text-lg text-indigo-600">
+                                        سلامونه!
+                                    </h3>
+                                    <p className="py-4">
+                                        د ماډل بند کولو لپاره اسکپ یا د کراس
+                                        توکمه ووهئ
+                                        <br />
+                                        Press ESC key or click on ✕ button to
+                                        close
+                                    </p>
+                                </div>
+                            </dialog>
                         </tr>
                     ))}
                 </tbody>
