@@ -3,14 +3,14 @@ import { Head, useForm } from "@inertiajs/react";
 import React, { useState } from "react";
 import TextInput from "@/Components/TextInput";
 import PrimaryButton from "@/Components/PrimaryButton";
+import { BackButton } from "@/Components/BackButton";
 
-export default function Edit({auth, company}) {
+export default function Add({ auth }) {
     const { data, setData, post, errors } = useForm({
-        id: company.id,
-        company_name: company.company_name,
-        company_address: company.company_address,
-        contact_email: company.contact_email,
-        company_phone: company.company_phone,
+        company_name: "",
+        company_address: "",
+        company_email: "",
+        company_phone: "",
         company_logo: null,
     });
 
@@ -19,18 +19,22 @@ export default function Edit({auth, company}) {
     function submit(e) {
         e.preventDefault();
         setLoading(true); // Set loading to true
-        post(route("company.update"), {
+        post(route("companies.store"), {
             onFinish: () => setLoading(false), // Reset loading state after submission
         });
     }
 
     return (
-        <Authenticated user={auth.user} header={<h2>Edit Company </h2>}>
-            <Head title="Edit Company" />
+        <Authenticated user={auth.user} header={<h2>Add New Company </h2>}>
+            <Head title="Add Company" />
             <form
                 onSubmit={submit}
                 className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md space-y-6"
             >
+                
+                <div className="flex w-full flex-col">
+                    <div className="divider divider-success font-bold">د کمپني ټول مشخصات اضافه کول</div>
+                </div>
                 <div>
                     <label
                         htmlFor="company_name"
@@ -39,15 +43,18 @@ export default function Edit({auth, company}) {
                         Company Name
                     </label>
                     <TextInput
-                        autoFocus={true}    
+                        autoFocus={true}
+                        required
                         type="text"
                         placeholder="د شرکت نوم ولیکئ"
-                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        minlength="3"
+                        className="input validator mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                         value={data.company_name}
                         onChange={(e) =>
                             setData("company_name", e.target.value)
                         }
                     />
+                    <p className="validator-hint">د شرکت نوم ضروري دی</p>
                     {errors.company_name && (
                         <div className="text-sm text-red-600 mt-1">
                             {errors.company_name}
@@ -80,7 +87,7 @@ export default function Edit({auth, company}) {
 
                 <div>
                     <label
-                        htmlFor="contact_email"
+                        htmlFor="company_email"
                         className="block text-sm font-medium text-gray-700"
                     >
                         Company Email
@@ -88,15 +95,16 @@ export default function Edit({auth, company}) {
                     <TextInput
                         type="email"
                         placeholder="د شرکت ایمیل ولیکئ"
-                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                        value={data.contact_email}
+                        required
+                        className="input validator mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        value={data.company_email}
                         onChange={(e) =>
-                            setData("contact_email", e.target.value)
+                            setData("company_email", e.target.value)
                         }
                     />
-                    {errors.contact_email && (
+                    {errors.company_email && (
                         <div className="text-sm text-red-600 mt-1">
-                            {errors.contact_email}
+                            {errors.company_email}
                         </div>
                     )}
                 </div>
@@ -109,14 +117,19 @@ export default function Edit({auth, company}) {
                         Company Phone
                     </label>
                     <TextInput
-                        type="text"
+                        type="tel"
                         placeholder="د شرکت د اړیکې شمیره ولیکئ"
-                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        className="input validator tabular-nums mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        pattern="[0-9]*"
+                        minlength="10"
+                        maxlength="10"
+                        title="باید 10 عدده وي"
                         value={data.company_phone}
                         onChange={(e) =>
                             setData("company_phone", e.target.value)
                         }
                     />
+                    <p className="validator-hint">Must be 10 digits</p>
                     {errors.company_phone && (
                         <div className="text-sm text-red-600 mt-1">
                             {errors.company_phone}
@@ -124,23 +137,22 @@ export default function Edit({auth, company}) {
                     )}
                 </div>
 
-                    <div>
-                        <img src={'../../storage/' + company.company_logo } alt="" style={{ width: '240px'}} />
-                    </div>
                 <div>
                     <label
                         htmlFor="company_logo"
                         className="block text-sm font-medium text-gray-700"
                     >
-                        Company Logo
+                        د شرکت / کمپني لوګو
                     </label>
+
                     <TextInput
                         type="file"
-                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                         onChange={(e) =>
                             setData("company_logo", e.target.files[0])
                         }
+                        className="file-input w-full file-input-info"
                     />
+
                     {errors.company_logo && (
                         <div className="text-sm text-red-600 mt-1">
                             {errors.company_logo}
@@ -148,18 +160,17 @@ export default function Edit({auth, company}) {
                     )}
                 </div>
 
-                <div className="flex justify-end">
-                    <PrimaryButton
-                        className={`px-6 py-2 rounded-md focus:ring-2 focus:ring-offset-2 ${
-                            loading
-                                ? "bg-gray-400 cursor-not-allowed"
-                                : "bg-green-600 hover:bg-green-700 text-white"
+                <div className="text-center">
+                    <button
+                        className={`btn ml-5 btn-wide btn-accent btn-outline btn-sm btn-dash rounded-full ${
+                            loading ? "bg-gray-400 cursor-not-allowed" : ""
                         }`}
                         type="submit"
                         disabled={loading} // Disable button when loading
                     >
-                        {loading ? "تغیر ..." : "تغیر"}
-                    </PrimaryButton>
+                        {loading ? "ثبت ..." : "ثبت"}
+                    </button>
+                    <BackButton className="btn-wide btn-sm btn-error" />
                 </div>
             </form>
         </Authenticated>

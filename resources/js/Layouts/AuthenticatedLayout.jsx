@@ -17,8 +17,10 @@ export default function Authenticated({ header, children }) {
 
     return ( 
         <>
+        
         <div className="flex min-h-screen bg-gray-100 dark:bg-gray-900">
                  <Sidebar>
+                    
                           <br />
                             <SidebarItem icon={<Home size={20} />} text="Home" alert />
                             <Link href={route("dashboard")} >
@@ -35,10 +37,10 @@ export default function Authenticated({ header, children }) {
                             <Link href={route("profile.edit")}>
                                 <SidebarItem icon={<ChefHat size={20} />} text="Suppliers" active={route().current("profile.edit") } alert={route().current("profile.edit") } />
                             </Link>
-                            <Link href={route("company")}>
+                            <Link href={route("companies")}>
                                 <SidebarItem icon={<Calendar size={20} />} text="کمپني" 
-                                active={["company", "company.add", "company.edit"].some(routeName => route().current(routeName))} 
-                                alert={["company", "company.add", "company.edit"].some(routeName => route().current(routeName))} 
+                                active={["companies", "companies.create", "companies.edit"].some(routeName => route().current(routeName))} 
+                                alert={["companies", "companies.create", "companies.edit"].some(routeName => route().current(routeName))} 
                            />
                             </Link>
 
