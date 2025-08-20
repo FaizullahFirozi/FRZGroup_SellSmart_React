@@ -3,8 +3,9 @@ import { Head, useForm } from "@inertiajs/react";
 import React, { useState } from "react";
 import TextInput from "@/Components/TextInput";
 import PrimaryButton from "@/Components/PrimaryButton";
+import { BackButton } from "@/Components/BackButton";
 
-export default function Edit({auth, company}) {
+export default function Edit({ auth, company }) {
     const { data, setData, post, errors } = useForm({
         id: company.id,
         company_name: company.company_name,
@@ -31,6 +32,9 @@ export default function Edit({auth, company}) {
                 onSubmit={submit}
                 className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md space-y-6"
             >
+                  <div className="flex w-full flex-col">
+                    <div className="divider divider-primary">د کمپني ټول مشخصات تغیر کول</div>
+                </div>
                 <div>
                     <label
                         htmlFor="company_name"
@@ -39,7 +43,7 @@ export default function Edit({auth, company}) {
                         Company Name
                     </label>
                     <TextInput
-                        autoFocus={true}    
+                        autoFocus={true}
                         type="text"
                         placeholder="د شرکت نوم ولیکئ"
                         className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
@@ -124,9 +128,13 @@ export default function Edit({auth, company}) {
                     )}
                 </div>
 
-                    <div>
-                        <img src={'../../storage/' + company.company_logo } alt="" style={{ width: '240px'}} />
-                    </div>
+                <div>
+                    <img
+                        src={"../../storage/" + company.company_logo}
+                        alt=""
+                        style={{ width: "240px" }}
+                    />
+                </div>
                 <div>
                     <label
                         htmlFor="company_logo"
@@ -147,19 +155,17 @@ export default function Edit({auth, company}) {
                         </div>
                     )}
                 </div>
-
-                <div className="flex justify-end">
-                    <PrimaryButton
-                        className={`px-6 py-2 rounded-md focus:ring-2 focus:ring-offset-2 ${
-                            loading
-                                ? "bg-gray-400 cursor-not-allowed"
-                                : "bg-green-600 hover:bg-green-700 text-white"
+                <div className="text-center">
+                    <button
+                        className={`btn ml-5 btn-wide btn-success btn-outline btn-sm btn-dash rounded-full ${
+                            loading ? "bg-gray-400 cursor-not-allowed" : ""
                         }`}
                         type="submit"
                         disabled={loading} // Disable button when loading
                     >
-                        {loading ? "تغیر ..." : "تغیر"}
-                    </PrimaryButton>
+                        {loading ? "تغیراتو په حال کي ..." : "تغیر کول"}
+                        </button>
+                    <BackButton className="btn-wide btn-sm btn-error" />
                 </div>
             </form>
         </Authenticated>

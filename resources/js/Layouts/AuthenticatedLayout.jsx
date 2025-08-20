@@ -17,8 +17,10 @@ export default function Authenticated({ header, children }) {
 
     return ( 
         <>
+        
         <div className="flex min-h-screen bg-gray-100 dark:bg-gray-900">
                  <Sidebar>
+                    
                           <br />
                             <SidebarItem icon={<Home size={20} />} text="Home" alert />
                             <Link href={route("dashboard")} >
