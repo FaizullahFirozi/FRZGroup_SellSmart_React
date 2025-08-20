@@ -2,16 +2,15 @@ import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
 import React, { useState } from "react";
 import TextInput from "@/Components/TextInput";
-import PrimaryButton from "@/Components/PrimaryButton";
 import { BackButton } from "@/Components/BackButton";
 
-export default function Edit({ auth, company }) {
-    const { data, setData, post, errors } = useForm({
-        id: company.id,
-        company_name: company.company_name,
-        company_address: company.company_address,
-        contact_email: company.contact_email,
-        company_phone: company.company_phone,
+export default function Edit({ auth, companiesData }) {
+    const { data, setData, put, errors } = useForm({
+        id: companiesData.id,
+        company_name: companiesData.company_name,
+        company_address: companiesData.company_address,
+        company_email: companiesData.company_email,
+        company_phone: companiesData.company_phone,
         company_logo: null,
     });
 
@@ -20,7 +19,7 @@ export default function Edit({ auth, company }) {
     function submit(e) {
         e.preventDefault();
         setLoading(true); // Set loading to true
-        post(route("company.update"), {
+        put(route("companies.update", { company: data.id }), {
             onFinish: () => setLoading(false), // Reset loading state after submission
         });
     }
@@ -33,7 +32,7 @@ export default function Edit({ auth, company }) {
                 className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md space-y-6"
             >
                   <div className="flex w-full flex-col">
-                    <div className="divider divider-primary">د کمپني ټول مشخصات تغیر کول</div>
+                    <div className="divider divider-primary font-bold">د کمپني ټول مشخصات تغیر کول</div>
                 </div>
                 <div>
                     <label
@@ -84,7 +83,7 @@ export default function Edit({ auth, company }) {
 
                 <div>
                     <label
-                        htmlFor="contact_email"
+                        htmlFor="company_email"
                         className="block text-sm font-medium text-gray-700"
                     >
                         Company Email
@@ -93,14 +92,14 @@ export default function Edit({ auth, company }) {
                         type="email"
                         placeholder="د شرکت ایمیل ولیکئ"
                         className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                        value={data.contact_email}
+                        value={data.company_email}
                         onChange={(e) =>
-                            setData("contact_email", e.target.value)
+                            setData("company_email", e.target.value)
                         }
                     />
-                    {errors.contact_email && (
+                    {errors.company_email && (
                         <div className="text-sm text-red-600 mt-1">
-                            {errors.contact_email}
+                            {errors.company_email}
                         </div>
                     )}
                 </div>
@@ -130,7 +129,7 @@ export default function Edit({ auth, company }) {
 
                 <div>
                     <img
-                        src={"../../storage/" + company.company_logo}
+                        src={"../../storage/" + companiesData.company_logo}
                         alt=""
                         style={{ width: "240px" }}
                     />
