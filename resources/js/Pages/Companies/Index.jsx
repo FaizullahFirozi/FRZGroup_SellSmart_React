@@ -145,7 +145,6 @@ export default function Index({ auth, companiesData, flash }) {
                                         />
                                     </div>
                                 </div>
-
                                 {/* یو ډیالوګ دی ګی کله په عکس کلیک وکړی دغه عکس غټ ښیی */}
                                 <dialog
                                     id={`modal_${items.id}`}
