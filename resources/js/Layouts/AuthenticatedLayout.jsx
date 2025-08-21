@@ -1,7 +1,7 @@
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
-import { LayoutDashboard, Home, StickyNote, Layers, Flag, Calendar, LifeBuoy, Settings, Baby, ShoppingCart, ChefHat, Compass } from "lucide-react";
+import { LayoutDashboard, Home, StickyNote, Layers, Flag, Calendar, LifeBuoy, Settings, Baby, Theater, User, User2, User2Icon, UserCheck, UserCircle, UserCircle2Icon, StarOff, Users, Users2Icon, UserSquare, UserPlus } from "lucide-react";
 import Sidebar, { SidebarItem } from "@/components/Sidebar"
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link, usePage } from "@inertiajs/react";
@@ -27,26 +27,26 @@ export default function Authenticated({ header, children }) {
                                 <SidebarItem  icon={<LayoutDashboard size={20} />} text="ډشبورډ" active={route().current("dashboard")}  alert={route().current("dashboard") }/>
                             </Link>
                             <Link href={route("profile.edit")}>
-                                <SidebarItem icon={<Baby size={20} />} text="پروفایل" active={route().current("profile.edit") } alert={route().current("profile.edit") } />
+                                <SidebarItem icon={<UserCircle2Icon size={20} />} text="پروفایل" active={route().current("profile.edit") } alert={route().current("profile.edit") } />
                             </Link>
 
                             
-                            <Link href={route("profile.edit")}>
-                                <SidebarItem icon={<ShoppingCart size={20} />} text="Products" active={route().current("profile.edit") } alert={route().current("profile.edit") } />
-                            </Link>
-                            <Link href={route("profile.edit")}>
-                                <SidebarItem icon={<ChefHat size={20} />} text="Suppliers" active={route().current("profile.edit") } alert={route().current("profile.edit") } />
-                            </Link>
                             <Link href={route("companies")}>
-                                <SidebarItem icon={<Calendar size={20} />} text="کمپني" 
+                                <SidebarItem icon={<Theater  size={20}  />} text="کمپني" 
                                 active={["companies", "companies.create", "companies.edit"].some(routeName => route().current(routeName))} 
                                 alert={["companies", "companies.create", "companies.edit"].some(routeName => route().current(routeName))} 
                            />
                             </Link>
 
+                            <Link href={route("users")}>
+                            <SidebarItem icon={<Users size={20} />} text="کارمندان" 
+                                active={["users", "users.create", "users.edit"].some(routeName => route().current(routeName))} 
+                                alert={["users", "users.create", "users.edit"].some(routeName => route().current(routeName))} 
+                           />
+                            </Link>
+
 
                            
-                            <SidebarItem icon={<StickyNote size={20} />} text="Projects" alert />
                             <SidebarItem icon={<Calendar size={20} />} text="Calendar" />
                             <SidebarItem icon={<Layers size={20} />} text="Tasks" />
                             <SidebarItem icon={<Flag size={20} />} text="Reporting" />

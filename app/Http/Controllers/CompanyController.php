@@ -92,7 +92,7 @@ class CompanyController extends Controller
         : $items->company_logo;
         $items->update();
 
-        return redirect('companies')->with(['success' => 'شرکت په بریالئ توګه تازه شوه ✔️']);
+        return redirect('companies')->with(['success' => 'شرکت معلومات په بریالئ توګه تغیر شو ✔️']);
     }
 
     /**
