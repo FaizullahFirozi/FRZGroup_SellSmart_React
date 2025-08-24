@@ -1,7 +1,7 @@
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
-import { LayoutDashboard, Home, StickyNote, Layers, Flag, Calendar, LifeBuoy, Settings, Baby, Theater, User, User2, User2Icon, UserCheck, UserCircle, UserCircle2Icon, StarOff, Users, Users2Icon, UserSquare, UserPlus } from "lucide-react";
+import { LayoutDashboard, Home, StickyNote, Layers, Flag, Calendar, LifeBuoy, Settings, Baby, Theater, User, User2, User2Icon, UserCheck, UserCircle, UserCircle2Icon, StarOff, Users, Users2Icon, UserSquare, UserPlus, NotebookPen } from "lucide-react";
 import Sidebar, { SidebarItem } from "@/components/Sidebar"
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link, usePage } from "@inertiajs/react";
@@ -42,6 +42,12 @@ export default function Authenticated({ header, children }) {
                             <SidebarItem icon={<Users size={20} />} text="کارمندان" 
                                 active={["users", "users.create", "users.edit"].some(routeName => route().current(routeName))} 
                                 alert={["users", "users.create", "users.edit"].some(routeName => route().current(routeName))} 
+                           />
+                            </Link>
+                            <Link href={route("expenses")}>
+                            <SidebarItem icon={<NotebookPen size={20} />} text="مصارف" 
+                                active={["expenses", "expenses.create", "expenses.edit"].some(routeName => route().current(routeName))} 
+                                alert={["expenses", "expenses.create", "expenses.edit"].some(routeName => route().current(routeName))} 
                            />
                             </Link>
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
@@ -30,6 +31,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/companies', [CompanyController::class, 'index'])->name('companies');
     Route::resource('companies', CompanyController::class)->except('index'); // په دی خاطر مو انډکس تری لری کړی چی فقط د کمپنی نوم په اساس پیدا شی
     // companies end
+   
+
+    // Daily Expenses start
+    Route::get('/expenses', [ExpenseController::class, 'index'])->name('expenses');
+    Route::resource('expenses', ExpenseController::class)->except('index'); // په دی خاطر مو انډکس تری لری کړی چی فقط د کمپنی نوم په اساس پیدا شی
+    // Daily Expenses end
+   
    
     // users start
     Route::get('/users', [UserController::class, 'index'])->name('users');
