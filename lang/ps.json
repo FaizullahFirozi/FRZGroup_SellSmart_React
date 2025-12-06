@@ -1,0 +1,32 @@
+{
+    "Profile Information": "د پروفایل معلومات",
+    "ID": "شمیره",
+    "Name": "نوم",
+    "Last Name": "تخلص",
+    "Father Name": "د پلار نوم",
+    "Email": "ایمیل",
+    "Current Password": "اوسني پسورډ",
+    "New Password": "نوی پسورډ",
+    "Confirm  Password": "بیا تأیید پسورډ",
+    "Save": "ثبت کول",
+    "Edit": "تغیر کول",
+    "Delete": "ډیلیټ کول",
+    "Show": "ښودل",
+
+
+    "Phone Number": "د اړیکې شمیره",
+    "Photo": "انځور",
+    "General": "عمومي",
+    "Next": "بل",
+    "Previous": "مخکینئ",
+
+
+    "Company Name": "کمپنی نوم",
+    "Company Address": "کمپنی آدرس",
+    "Company Phone": "کمپنی اړیکې شمیره",
+    "Company Email": "کمپنی ایمیل",
+    "Company Logo": "کمپنی لوګو",
+
+    "Welcome": "ښه راغلاست"
+
+}

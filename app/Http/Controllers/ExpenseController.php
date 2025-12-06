@@ -68,8 +68,9 @@ class ExpenseController extends Controller
      */
     public function edit($id)
     {
-        $companiesData = Expense::findOrFail($id);
-        return Inertia::render('Expenses/Edit', compact ('expensesData'));
+        $expensesData = Expense::findOrFail($id);
+
+        return Inertia::render('Expenses/Edit', compact ('expensesData' ));
     }
 
     /**

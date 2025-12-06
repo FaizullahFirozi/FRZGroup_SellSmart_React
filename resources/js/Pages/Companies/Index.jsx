@@ -5,9 +5,10 @@ import { Head, Link, router, useForm } from "@inertiajs/react";
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useConfirmDelete } from "@/hooks/useConfirmDelete";
-
+import { useTranslation } from "react-i18next";
 
 export default function Index({ auth, companiesData, flash }) {
+    const { t,i18n } = useTranslation();
     const {
         data,
         setData,
@@ -62,6 +63,7 @@ export default function Index({ auth, companiesData, flash }) {
     return (
         <Authenticated user={auth.user} header={<h3>Companies List</h3>}>
             <Head title="Companies" />
+            
             <ToastContainer className={"m-5"} />
             <Link href={route("companies.create")}>
                 <button
@@ -84,25 +86,28 @@ export default function Index({ auth, companiesData, flash }) {
                 <thead className="bg-gray-300">
                     <tr>
                         <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            #
+                            { t('ID') }
                         </th>
                         <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            شرکت نوم
+                            { t('Company Name') }
+
                         </th>
                         <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            شرکت آدرس
+
+                            { t('Company Address') }
                         </th>
                         <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            شرکت د اړیکې شمیره
+                            { t('Company Phone') }
                         </th>
                         <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            شرکت ایمیل آدرس
+                            { t('Company Email') }
                         </th>
                         <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            شرکت لوګو
+                            { t('Company Logo') }
+
                         </th>
                         <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            عمومي
+                            { t('General') }
                         </th>
                     </tr>
                 </thead>
@@ -171,7 +176,7 @@ export default function Index({ auth, companiesData, flash }) {
                             <td className="border border-gray-300 px-4 py-2">
                                 <Link href={route("companies.edit", items.id )}>
                                     <button className="btn btn-xs rounded-full  btn-soft btn-accent btn-wide">
-                                        Edit
+                            { t('Edit') }
                                     </button>
                                 </Link>
                                 <button
@@ -182,13 +187,15 @@ export default function Index({ auth, companiesData, flash }) {
                                     }
                                     className="btn btn-xs rounded-full  btn-dash btn-warning btn-wide"
                                 >
-                                    Show
+                                    
+                            { t('Show') }
+
                                 </button>
                                 <button
                                     onClick={() => handleDelete(items.id)}
                                     className="btn btn-xs rounded-full  btn-soft btn-secondary btn-wide"
                                 >
-                                    Delete
+                            { t('Delete') }
                                 </button>
                             </td>
                             <dialog id="MyModal" className="modal">

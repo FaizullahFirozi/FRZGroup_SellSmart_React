@@ -9,7 +9,7 @@ export default function Add({ auth }) {
         expense_name: "",
         expense_date: "",
         expense_amount: null,
-        expense_amount_currency: "",
+        expense_amount_currency:  "افغانی" ,
     });
 
     const [loading, setLoading] = useState(false);
@@ -125,7 +125,7 @@ export default function Add({ auth }) {
                         }
                     >
                         <option value="" disabled>د پیسو ډول انتخاب کړئ</option>
-                        <option value="افغانی" selected>افغانی</option>
+                        <option value="افغانی">افغانی</option>
                         <option value="دالر">دالر</option>
                         <option value="کلدار">کلدار</option>
                     </select>

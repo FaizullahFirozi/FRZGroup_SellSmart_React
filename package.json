@@ -22,7 +22,9 @@
     },
     "dependencies": {
         "@inertiajs/inertia-react": "^0.8.1",
+        "i18next": "^25.7.1",
         "lucide-react": "^0.452.0",
+        "react-i18next": "^16.4.0",
         "react-toastify": "^11.0.5",
         "sweetalert2": "^11.22.4"
     }

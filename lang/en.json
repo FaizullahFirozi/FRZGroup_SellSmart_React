@@ -1,0 +1,35 @@
+{
+    "Profile Information": "Profile Information",
+    "ID": "ID",
+    "Name": "Name",
+    "Last Name": "Last Name",
+    "Father Name": "Father Name",
+    "Email": "Email",
+    "Current Password": "Current Password",
+    "New Password": "New Password",
+    "Confirm  Password": "Confirm  Password",
+    "Save": "Save",
+    "Edit": "Edit",
+    "Delete": "Delete",
+    "Show": "Show",
+
+
+    "Phone Number": "Phone Number",
+    "Photo": "Photo",
+    "General": "General",
+    "Next": "Next",
+    "Previous": "Previous",
+
+
+    "Company Name": "Company Name",
+    "Company Address": "Company Address",
+    "Company Phone": "Company Phone",
+    "Company Email": "Company Email",
+    "Company Logo": "Company Logo",
+
+
+    "Welcome": "Welcome"
+
+
+
+}
