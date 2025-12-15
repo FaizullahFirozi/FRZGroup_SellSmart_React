@@ -11,13 +11,13 @@ export default function Sidebar({ children }) {
     const [expanded, setExpanded] = useState(false); // چی سایډبار بند وی
 
     return (
-        <aside className="h-screen">
-            <nav className="h-full flex flex-col bg-white border-l shadow-sm">
+        <aside className="h-screen hidden md:block">
+            <nav className="h-full flex flex-col bg-white border-l shadow-md">
                 <div className="p-4 pb-2 flex justify-between items-center">
                     <img
-                        src="https://img.logoipsum.com/243.svg"
+                        src="https://avatars.githubusercontent.com/u/50979169?s=96&v=4"
                         className={`overflow-hidden transition-all ${
-                            expanded ? "w-32" : "w-0"
+                            expanded ? "w-15" : "w-0"
                         }`}
                         alt=""
                     />

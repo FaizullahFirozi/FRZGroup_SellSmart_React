@@ -145,28 +145,6 @@ export default function Index({ auth, usersData, flash }) {
                                         />
                                     </div>
                                 </div>
-                                {/* یو ډیالوګ دی ګی کله په عکس کلیک وکړی دغه عکس غټ ښیی */}
-                                <dialog
-                                    id={`modal_${items.id}`}
-                                    className="modal"
-                                >
-                                    {" "}
-                                    {/* Unique id */}
-                                    <div className="modal-box ">
-                                        <img
-                                            alt="User Avatar"
-                                            src={
-                                                "storage/" + items.avatar
-                                            }
-                                        />
-                                    </div>
-                                    <form
-                                        method="dialog"
-                                        className="modal-backdrop"
-                                    >
-                                        <button>close</button>
-                                    </form>
-                                </dialog>
                             </td>
                             <td className="border border-gray-300 px-4 py-2">
                                 <Link href={route("users.edit", items.id )}>
@@ -191,30 +169,52 @@ export default function Index({ auth, usersData, flash }) {
                                     Delete
                                 </button>
                             </td>
-                            <dialog id="MyModal" className="modal">
-                                <div className="modal-box">
-                                    <form method="dialog">
-                                        {/* if there is a button in form, it will close the modal */}
-                                        <button className="btn btn-sm btn-circle hover:text-red-600 btn-ghost absolute left-2 top-2">
-                                            ✕
-                                        </button>
-                                    </form>
-                                    <h3 className="font-bold text-lg text-indigo-600">
-                                        سلامونه!
-                                    </h3>
-                                    <p className="py-4">
-                                        د ماډل بند کولو لپاره اسکپ یا د کراس
-                                        توکمه ووهئ
-                                        <br />
-                                        Press ESC key or click on ✕ button to
-                                        close
-                                    </p>
-                                </div>
-                            </dialog>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            {usersData.data.map((items) => (
+                <dialog
+                    key={items.id}
+                    id={`modal_${items.id}`}
+                    className="modal"
+                >
+                    <div className="modal-box ">
+                        <img
+                            alt="User Avatar"
+                            src={
+                                "storage/" + items.avatar
+                            }
+                        />
+                    </div>
+                    <form
+                        method="dialog"
+                        className="modal-backdrop"
+                    >
+                        <button>close</button>
+                    </form>
+                </dialog>
+            ))}
+            <dialog id="MyModal" className="modal">
+                <div className="modal-box">
+                    <form method="dialog">
+                        {/* if there is a button in form, it will close the modal */}
+                        <button className="btn btn-sm btn-circle hover:text-red-600 btn-ghost absolute left-2 top-2">
+                            ✕
+                        </button>
+                    </form>
+                    <h3 className="font-bold text-lg text-indigo-600">
+                        سلامونه!
+                    </h3>
+                    <p className="py-4">
+                        د ماډل بند کولو لپاره اسکپ یا د کراس
+                        توکمه ووهئ
+                        <br />
+                        Press ESC key or click on ✕ button to
+                        close
+                    </p>
+                </div>
+            </dialog>
             <Pagination
                 links={usersData.links}
                 currentPage={usersData.currentPage}
