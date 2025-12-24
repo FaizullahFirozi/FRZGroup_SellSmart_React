@@ -22,18 +22,25 @@ class UpdateCompanyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'company_name' => ['required'],
+            'company_name' => ['required', 'unique:companies,company_name,' . $this->route('company')->id],
             'company_address' => ['required'],
-            // 'company_phone' => 'unique:companies',
-            // 'company_address' => ['required'],
+            'company_phone' => ['required','min:10',  'unique:companies,company_phone,' . $this->route('company')->id],
+            'company_email' => ['required', 'unique:companies,company_email,' . $this->route('company')->id],
+            // 'company_logo' => '',
+    
         ];
     }
     public function messages(): array
     {
         return [
             'company_name.required' => 'د کمپنۍ نوم ضروری دی.',
+            'company_name.unique' => 'دغه نوم له مخکی په سیسټم کی موجود دی.',
             'company_address.required' => 'د کمپنۍ آدرس ضروری دی.',
-            // 'company_phone.unique' => 'دغه نمبر له مخکی په سیسټم کی موجود دی.',
+            'company_email.unique' => 'دغه ایمیل له مخکی په سیسټم کی موجود دی.',
+            'company_phone.unique' => 'دغه نمبر له مخکی په سیسټم کی موجود دی.',
+            'company_phone.min' => 'دغه نمبر باید کم تر کمه 10 عدده وی.',
+            // 'company_logo.required' => 'د کمپنۍ لوګو ضروری دی.',
         ];
     }
+
 }

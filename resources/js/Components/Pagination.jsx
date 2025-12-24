@@ -11,7 +11,7 @@ const Pagination = ({ links, currentPage, setCurrentPage }) => {
     };
 
     return (
-        <nav aria-label="Page navigation" className="flex justify-center mt-4">
+        <nav aria-label="Page navigation" className="flex justify-center mt-4 float-right">
             <ul className="inline-flex items-center -space-x-px">
                 {links.map((link, index) => (
                     <li key={index}>

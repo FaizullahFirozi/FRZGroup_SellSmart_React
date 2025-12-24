@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class CompanyController extends Controller
@@ -21,9 +22,9 @@ class CompanyController extends Controller
             $query->where('company_name', 'like', '%' . $request->company_name . '%');
         }
 
-        $companies = $query->paginate(10);
+        $result = $query->paginate(10);
 
-        return Inertia('Company/Index', ['companies' => $companies]);
+        return Inertia('Companies/Index', ['companiesData' => $result]);
     }
 
     /**
@@ -31,7 +32,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return Inertia('Company/Add');
+        return Inertia('Companies/Create');
     }
 
     /**
@@ -39,22 +40,22 @@ class CompanyController extends Controller
      */
     public function store(StoreCompanyRequest $request)
     {
-        sleep(1);
+        // sleep(1);
 
         $company = new Company();
 
         $company->company_name = $request->company_name;
         $company->company_address = $request->company_address;
         $company->company_phone = $request->company_phone;
-        $company->contact_email = $request->contact_email;
-        // $logo_path = $request->file('company_logo')->store('CompanyLogos', 'public');
-        // $company->company_logo = $logo_path;
-        $company->company_logo = $request->hasFile('company_logo') 
-        ? $request->file('company_logo')->store('CompanyLogos', 'public') 
-        : null;
+        $company->company_email = $request->company_email;
+        $logo_path = $request->file('company_logo')->store('CompanyLogos', 'public');
+        $company->company_logo = $logo_path;  
+        // $company->company_logo = $request->hasFile('company_logo') 
+        // ? $request->file('company_logo')->store('CompanyLogos', 'public') 
+        // : null;
         $company->save();
 
-        return redirect('company')->with(['success' => 'شرکت په بریالئ توګه اضافه شوه ✔️']);
+        return redirect('companies')->with(['success' => 'شرکت په بریالئ توګه اضافه شوه ✔️']);
     }
 
     /**
@@ -70,9 +71,8 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        $company = Company::findOrFail($id);
-
-        return Inertia::render('Company/Edit', compact ('company'));
+        $companiesData = Company::findOrFail($id);
+        return Inertia::render('Companies/Edit', compact ('companiesData'));
     }
 
     /**
@@ -80,24 +80,34 @@ class CompanyController extends Controller
      */
     public function update(UpdateCompanyRequest $request, Company $company)
     {
-        $item = Company::findOrFail($request->id);
-        $item->company_name = $request->company_name;
-        $item->company_address = $request->company_address;
-        $item->company_phone = $request->company_phone;
-        $item->contact_email = $request->contact_email;
-        $item->company_logo = $request->hasFile('company_logo')
+      
+        
+        $items = Company::findOrFail($request->id);
+        $items->company_name = $request->company_name;
+        $items->company_address = $request->company_address;
+        $items->company_phone = $request->company_phone;
+        $items->company_email = $request->company_email;
+        $items->company_logo = $request->hasFile('company_logo')
         ? $request->file('company_logo')->store('CompanyLogos', 'public')
-        : $item->company_logo;
-        $item->update();
+        : $items->company_logo;
+        $items->update();
 
-        return redirect('company')->with(['success' => 'شرکت په بریالئ توګه تازه شوه ✔️']);
+        return redirect('companies')->with(['success' => 'شرکت معلومات په بریالئ توګه تغیر شو ✔️']);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Company $company)
+    public function destroy($id)
     {
-        //
+        $items = Company::findOrFail($id);
+
+        if($items->company_logo){
+            Storage::disk('public')->delete($items->company_logo);
+        }
+
+        $items->delete();
+
+        return redirect('companies')->with('successDelete', 'شرکت په بریالی توګه ډیلیټ شو.');        
     }
 }

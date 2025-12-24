@@ -9,7 +9,7 @@ export default function Add({ auth }) {
     const { data, setData, post, errors } = useForm({
         company_name: "",
         company_address: "",
-        contact_email: "",
+        company_email: "",
         company_phone: "",
         company_logo: null,
     });
@@ -19,7 +19,7 @@ export default function Add({ auth }) {
     function submit(e) {
         e.preventDefault();
         setLoading(true); // Set loading to true
-        post(route("company.store"), {
+        post(route("companies.store"), {
             onFinish: () => setLoading(false), // Reset loading state after submission
         });
     }
@@ -33,7 +33,7 @@ export default function Add({ auth }) {
             >
                 
                 <div className="flex w-full flex-col">
-                    <div className="divider divider-success">د کمپني ټول مشخصات اضافه کول</div>
+                    <div className="divider divider-success font-bold">د کمپني ټول مشخصات اضافه کول</div>
                 </div>
                 <div>
                     <label
@@ -87,7 +87,7 @@ export default function Add({ auth }) {
 
                 <div>
                     <label
-                        htmlFor="contact_email"
+                        htmlFor="company_email"
                         className="block text-sm font-medium text-gray-700"
                     >
                         Company Email
@@ -97,14 +97,14 @@ export default function Add({ auth }) {
                         placeholder="د شرکت ایمیل ولیکئ"
                         required
                         className="input validator mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                        value={data.contact_email}
+                        value={data.company_email}
                         onChange={(e) =>
-                            setData("contact_email", e.target.value)
+                            setData("company_email", e.target.value)
                         }
                     />
-                    {errors.contact_email && (
+                    {errors.company_email && (
                         <div className="text-sm text-red-600 mt-1">
-                            {errors.contact_email}
+                            {errors.company_email}
                         </div>
                     )}
                 </div>

@@ -22,9 +22,12 @@ class StoreCompanyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'company_name' => 'required',
+              
+            'company_name' => 'required|unique:companies',
             'company_address' => 'required',
-            'company_phone' => 'unique:companies',
+            'company_email' => 'unique:companies',
+            'company_phone' => 'unique:companies|min:10',
+            'company_logo' => 'required',
         ];
         
     }
@@ -32,8 +35,12 @@ class StoreCompanyRequest extends FormRequest
     {
         return [
             'company_name.required' => 'د کمپنۍ نوم ضروری دی.',
+            'company_name.unique' => 'دغه نوم له مخکی په سیسټم کی موجود دی.',
             'company_address.required' => 'د کمپنۍ آدرس ضروری دی.',
+            'company_email.unique' => 'دغه ایمیل له مخکی په سیسټم کی موجود دی.',
             'company_phone.unique' => 'دغه نمبر له مخکی په سیسټم کی موجود دی.',
+            'company_phone.min' => 'دغه نمبر باید کم تر کمه 10 عدده وی.',
+            'company_logo.required' => 'د کمپنۍ لوګو ضروری دی.',
         ];
     }
 }

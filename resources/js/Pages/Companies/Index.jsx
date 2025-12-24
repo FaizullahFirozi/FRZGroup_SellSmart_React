@@ -1,11 +1,25 @@
 import { Button } from "@/Components/Button";
 import Pagination from "@/Components/Pagination";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
-import { Head, Link, useForm } from "@inertiajs/react";
+import { Head, Link, router, useForm } from "@inertiajs/react";
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { useConfirmDelete } from "@/hooks/useConfirmDelete";
+import { useTranslation } from "react-i18next";
 
-export default function Index({ auth, companies, flash }) {
+export default function Index({ auth, companiesData, flash }) {
+    const { t,i18n } = useTranslation();
+    const {
+        data,
+        setData,
+        get,
+        delete: destroy,
+    } = useForm({
+        company_name: "",
+
+        page: companiesData.currentPage,
+    });
+
     useEffect(() => {
         if (flash.message.success) {
             toast.success(flash.message.success);
@@ -15,11 +29,6 @@ export default function Index({ auth, companies, flash }) {
         }
     }, [flash]);
 
-    const { data, setData, get } = useForm({
-        company_name: "",
-
-        page: companies.currentPage,
-    });
     const [typingTimeout, setTypingTimeout] = useState(null);
 
     const handleFilterChange = (e) => {
@@ -36,7 +45,7 @@ export default function Index({ auth, companies, flash }) {
         // Set a new timeout to send the request after 5 seconds
         setTypingTimeout(
             setTimeout(() => {
-                get(route("company"), {
+                get(route("companies"), {
                     preserveState: true,
                     company_name: data.company_name,
                     page: data.page,
@@ -45,71 +54,83 @@ export default function Index({ auth, companies, flash }) {
         );
     };
 
+    const { confirmDelete } = useConfirmDelete();
+
+    const handleDelete = (companyId) => {
+        confirmDelete("companies.destroy", { id: companyId }, "شرکت په بریالی توګه ډیلیټ شو.");
+    };
+
     return (
         <Authenticated user={auth.user} header={<h3>Companies List</h3>}>
             <Head title="Companies" />
+            
             <ToastContainer className={"m-5"} />
-            <Link href={route("company.add")}>
-                <button className="btn btn-dash btn-secondary rounded-full
-                " >شرکت اضافه کړئ</button>
+            <Link href={route("companies.create")}>
+                <button
+                    className="btn btn-dash btn-secondary rounded-full
+                "
+                >
+                    شرکت اضافه کړئ
+                </button>
             </Link>
-                            <input
-                                className="input file-input-ghost"
-                                type="text"
-                                name="company_name"
-                                value={data.company_name}
-                                onChange={handleFilterChange}
-                                placeholder="Search Here By Company Name"
-                            />
-          
+            <input
+                className="input file-input-ghost"
+                type="text"
+                name="company_name"
+                value={data.company_name}
+                onChange={handleFilterChange}
+                placeholder="Search Here By Company Name"
+            />
 
             <table className="min-w-full mt-5 border-collapse border border-gray-200 shadow-md">
                 <thead className="bg-gray-300">
-                  
                     <tr>
                         <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            #
+                            { t('ID') }
                         </th>
                         <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            شرکت نوم
+                            { t('Company Name') }
+
                         </th>
                         <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            شرکت آدرس
+
+                            { t('Company Address') }
                         </th>
                         <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            شرکت د اړیکې شمیره
+                            { t('Company Phone') }
                         </th>
                         <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            شرکت ایمیل آدرس
+                            { t('Company Email') }
                         </th>
                         <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            شرکت لوګو
+                            { t('Company Logo') }
+
                         </th>
                         <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            عمومي
+                            { t('General') }
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {companies.data.map((company) => (
+                    {companiesData.data.map((items) => (
                         <tr
-                            key={company.id}
+                            key={items.id}
                             className="odd:bg-white even:bg-gray-50"
                         >
                             <td className="border border-gray-300 px-4 py-2">
-                                {company.id}
+                                {items.id}
                             </td>
                             <td className="border border-gray-300 px-4 py-2">
-                                {company.company_name}
+                                {items.company_name}
                             </td>
                             <td className="border border-gray-300 px-4 py-2">
-                                {company.company_address}
+                                {items.company_address}
                             </td>
                             <td className="border border-gray-300 px-4 py-2">
-                                {company.company_phone}
+                                {items.company_phone}
                             </td>
                             <td className="border border-gray-300 px-4 py-2">
-                                {company.company_email}
+                                {items.company_email}
                             </td>
                             <td className="border border-gray-300 px-4 py-2">
                                 <div className=" avatar hover:cursor-pointer hover:opacity-80">
@@ -118,22 +139,20 @@ export default function Index({ auth, companies, flash }) {
                                             onClick={() =>
                                                 document
                                                     .getElementById(
-                                                        `modal_${company.id}`
+                                                        `modal_${items.id}`
                                                     ) // Use a unique id for each modal
                                                     .showModal()
                                             }
                                             alt="Logo"
                                             src={
-                                                "storage/" +
-                                                company.company_logo
+                                                "storage/" + items.company_logo
                                             }
                                         />
-                                        
                                     </div>
                                 </div>
-                               
+                                {/* یو ډیالوګ دی ګی کله په عکس کلیک وکړی دغه عکس غټ ښیی */}
                                 <dialog
-                                    id={`modal_${company.id}`}
+                                    id={`modal_${items.id}`}
                                     className="modal"
                                 >
                                     {" "}
@@ -142,8 +161,7 @@ export default function Index({ auth, companies, flash }) {
                                         <img
                                             alt="Company Logo"
                                             src={
-                                                "storage/" +
-                                                company.company_logo
+                                                "storage/" + items.company_logo
                                             }
                                         />
                                     </div>
@@ -156,9 +174,9 @@ export default function Index({ auth, companies, flash }) {
                                 </dialog>
                             </td>
                             <td className="border border-gray-300 px-4 py-2">
-                                <Link href={route("company.edit", company.id)}>
+                                <Link href={route("companies.edit", items.id )}>
                                     <button className="btn btn-xs rounded-full  btn-soft btn-accent btn-wide">
-                                        Edit
+                            { t('Edit') }
                                     </button>
                                 </Link>
                                 <button
@@ -169,13 +187,16 @@ export default function Index({ auth, companies, flash }) {
                                     }
                                     className="btn btn-xs rounded-full  btn-dash btn-warning btn-wide"
                                 >
-                                    Show
+                                    
+                            { t('Show') }
+
                                 </button>
-                                <Link href={route("company.edit", company.id)}>
-                                    <button className="btn btn-xs rounded-full  btn-soft btn-secondary btn-wide">
-                                        Delete
-                                    </button>
-                                </Link>
+                                <button
+                                    onClick={() => handleDelete(items.id)}
+                                    className="btn btn-xs rounded-full  btn-soft btn-secondary btn-wide"
+                                >
+                            { t('Delete') }
+                                </button>
                             </td>
                             <dialog id="MyModal" className="modal">
                                 <div className="modal-box">
@@ -202,8 +223,8 @@ export default function Index({ auth, companies, flash }) {
                 </tbody>
             </table>
             <Pagination
-                links={companies.links}
-                currentPage={companies.currentPage}
+                links={companiesData.links}
+                currentPage={companiesData.currentPage}
                 setCurrentPage={(page) => setData("page", page)}
             />
         </Authenticated>

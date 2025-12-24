@@ -2,17 +2,17 @@ import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
 import React, { useState } from "react";
 import TextInput from "@/Components/TextInput";
-import PrimaryButton from "@/Components/PrimaryButton";
 import { BackButton } from "@/Components/BackButton";
 
-export default function Edit({ auth, company }) {
-    const { data, setData, post, errors } = useForm({
-        id: company.id,
-        company_name: company.company_name,
-        company_address: company.company_address,
-        contact_email: company.contact_email,
-        company_phone: company.company_phone,
-        company_logo: null,
+export default function Edit({ auth, usersData }) {
+    const { data, setData, put, errors } = useForm({
+
+
+        id: usersData.id,
+        name: usersData.name,
+        email: usersData.email,
+        phone: usersData.phone,
+        avatar: null,
     });
 
     const [loading, setLoading] = useState(false);
@@ -20,41 +20,41 @@ export default function Edit({ auth, company }) {
     function submit(e) {
         e.preventDefault();
         setLoading(true); // Set loading to true
-        post(route("company.update"), {
+        put(route("users.update", { user: data.id }), {
             onFinish: () => setLoading(false), // Reset loading state after submission
         });
     }
 
     return (
-        <Authenticated user={auth.user} header={<h2>Edit Company </h2>}>
-            <Head title="Edit Company" />
+        <Authenticated user={auth.user} header={<h2>Edit User </h2>}>
+            <Head title="Edit User" />
             <form
                 onSubmit={submit}
                 className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md space-y-6"
             >
                   <div className="flex w-full flex-col">
-                    <div className="divider divider-primary">د کمپني ټول مشخصات تغیر کول</div>
+                    <div className="divider divider-primary font-bold">د کارکوونکي ټول مشخصات تغیر کول</div>
                 </div>
                 <div>
                     <label
-                        htmlFor="company_name"
+                        htmlFor="name"
                         className="block text-sm font-medium text-gray-700"
                     >
-                        Company Name
+                        User Name
                     </label>
                     <TextInput
                         autoFocus={true}
                         type="text"
-                        placeholder="د شرکت نوم ولیکئ"
+                        placeholder="د کارمند نوم ولیکئ"
                         className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                        value={data.company_name}
+                        value={data.name}
                         onChange={(e) =>
-                            setData("company_name", e.target.value)
+                            setData("name", e.target.value)
                         }
                     />
-                    {errors.company_name && (
+                    {errors.name && (
                         <div className="text-sm text-red-600 mt-1">
-                            {errors.company_name}
+                            {errors.name}
                         </div>
                     )}
                 </div>
@@ -84,7 +84,7 @@ export default function Edit({ auth, company }) {
 
                 <div>
                     <label
-                        htmlFor="contact_email"
+                        htmlFor="company_email"
                         className="block text-sm font-medium text-gray-700"
                     >
                         Company Email
@@ -93,14 +93,14 @@ export default function Edit({ auth, company }) {
                         type="email"
                         placeholder="د شرکت ایمیل ولیکئ"
                         className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                        value={data.contact_email}
+                        value={data.company_email}
                         onChange={(e) =>
-                            setData("contact_email", e.target.value)
+                            setData("company_email", e.target.value)
                         }
                     />
-                    {errors.contact_email && (
+                    {errors.company_email && (
                         <div className="text-sm text-red-600 mt-1">
-                            {errors.contact_email}
+                            {errors.company_email}
                         </div>
                     )}
                 </div>
@@ -130,7 +130,7 @@ export default function Edit({ auth, company }) {
 
                 <div>
                     <img
-                        src={"../../storage/" + company.company_logo}
+                        src={"../../storage/" + usersData.avatar}
                         alt=""
                         style={{ width: "240px" }}
                     />

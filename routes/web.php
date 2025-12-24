@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -21,20 +23,26 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-// Route::resource('company', CompanyController::class)->except('index');
 
 
 Route::middleware('auth')->group(function () {
 
-    Route::prefix('company')->controller(CompanyController::class)->group(function () {
-        Route::get('/',  'index')->name('company');
-        // Route::get('add',  'create')->name('company.add'); //same
-        Route::inertia('add', 'Company/Add')->name('company.add'); //same
-        Route::post('store', 'store')->name('company.store');
-        Route::get('edit/{id}',  'edit')->name('company.edit');
-        Route::post('update', 'update')->name('company.update');
+    // companies start
+    Route::get('/companies', [CompanyController::class, 'index'])->name('companies');
+    Route::resource('companies', CompanyController::class)->except('index'); // په دی خاطر مو انډکس تری لری کړی چی فقط د کمپنی نوم په اساس پیدا شی
+    // companies end
+   
 
-    });
+    // Daily Expenses start
+    Route::get('/expenses', [ExpenseController::class, 'index'])->name('expenses');
+    Route::resource('expenses', ExpenseController::class)->except('index'); // په دی خاطر مو انډکس تری لری کړی چی فقط د کمپنی نوم په اساس پیدا شی
+    // Daily Expenses end
+   
+   
+    // users start
+    Route::get('/users', [UserController::class, 'index'])->name('users');
+    Route::resource('users', UserController::class)->except('index'); // په دی خاطر مو انډکس تری لری کړی چی فقط د کمپنی نوم په اساس پیدا شی
+    // users end
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

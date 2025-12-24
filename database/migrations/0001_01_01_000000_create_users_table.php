@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('avatar')->nullable();
             $table->rememberToken();
+            $table->foreignId('created_by')->nullable()->constrained('users')->onUpdate('cascade');
+            $table->foreignId('updated_by')->nullable()->constrained('users')->onUpdate('cascade');
             $table->timestamps();
         });
 

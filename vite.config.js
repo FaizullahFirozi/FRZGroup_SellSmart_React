@@ -12,7 +12,10 @@ export default defineConfig({
     ],
     resolve: { //add by FRZ
         alias: {
-            "@" : "/resources/js"
+            "@" : "/resources/js",
+        },
+        alias: {
+            "@lang" : '/lang'
         },
     },
 });
