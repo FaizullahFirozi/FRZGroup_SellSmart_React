@@ -24,7 +24,16 @@ class UpdateCompanyRequest extends FormRequest
         return [
             'company_name' => ['required'],
             'company_address' => ['required'],
+            // 'company_phone' => 'unique:companies',
             // 'company_address' => ['required'],
+        ];
+    }
+    public function messages(): array
+    {
+        return [
+            'company_name.required' => 'د کمپنۍ نوم ضروری دی.',
+            'company_address.required' => 'د کمپنۍ آدرس ضروری دی.',
+            // 'company_phone.unique' => 'دغه نمبر له مخکی په سیسټم کی موجود دی.',
         ];
     }
 }

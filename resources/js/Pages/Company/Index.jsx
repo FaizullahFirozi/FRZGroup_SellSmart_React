@@ -112,7 +112,7 @@ export default function Index({ auth, companies, flash }) {
                                 {company.company_email}
                             </td>
                             <td className="border border-gray-300 px-4 py-2">
-                                <div className="avatar hover:cursor-pointer hover:opacity-80">
+                                <div className=" avatar hover:cursor-pointer hover:opacity-80">
                                     <div className="ring-info text-center ring-offset-base-100 w-14 rounded-full ring ring-offset-2">
                                         <img
                                             onClick={() =>

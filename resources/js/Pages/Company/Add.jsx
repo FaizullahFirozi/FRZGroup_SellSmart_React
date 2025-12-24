@@ -31,6 +31,10 @@ export default function Add({ auth }) {
                 onSubmit={submit}
                 className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md space-y-6"
             >
+                
+                <div className="flex w-full flex-col">
+                    <div className="divider divider-success">د کمپني ټول مشخصات اضافه کول</div>
+                </div>
                 <div>
                     <label
                         htmlFor="company_name"
@@ -40,14 +44,17 @@ export default function Add({ auth }) {
                     </label>
                     <TextInput
                         autoFocus={true}
+                        required
                         type="text"
                         placeholder="د شرکت نوم ولیکئ"
-                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        minlength="3"
+                        className="input validator mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                         value={data.company_name}
                         onChange={(e) =>
                             setData("company_name", e.target.value)
                         }
                     />
+                    <p className="validator-hint">د شرکت نوم ضروري دی</p>
                     {errors.company_name && (
                         <div className="text-sm text-red-600 mt-1">
                             {errors.company_name}
@@ -88,7 +95,8 @@ export default function Add({ auth }) {
                     <TextInput
                         type="email"
                         placeholder="د شرکت ایمیل ولیکئ"
-                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        required
+                        className="input validator mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                         value={data.contact_email}
                         onChange={(e) =>
                             setData("contact_email", e.target.value)
@@ -109,14 +117,19 @@ export default function Add({ auth }) {
                         Company Phone
                     </label>
                     <TextInput
-                        type="text"
+                        type="tel"
                         placeholder="د شرکت د اړیکې شمیره ولیکئ"
-                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        className="input validator tabular-nums mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        pattern="[0-9]*"
+                        minlength="10"
+                        maxlength="10"
+                        title="باید 10 عدده وي"
                         value={data.company_phone}
                         onChange={(e) =>
                             setData("company_phone", e.target.value)
                         }
                     />
+                    <p className="validator-hint">Must be 10 digits</p>
                     {errors.company_phone && (
                         <div className="text-sm text-red-600 mt-1">
                             {errors.company_phone}
@@ -131,7 +144,7 @@ export default function Add({ auth }) {
                     >
                         د شرکت / کمپني لوګو
                     </label>
-                   
+
                     <TextInput
                         type="file"
                         onChange={(e) =>
