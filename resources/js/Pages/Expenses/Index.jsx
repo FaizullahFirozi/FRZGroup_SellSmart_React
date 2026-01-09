@@ -151,30 +151,30 @@ export default function Index({ auth, expensesData, flash }) {
                                     Delete
                                 </button>
                             </td>
-                            <dialog id="MyModal" className="modal">
-                                <div className="modal-box">
-                                    <form method="dialog">
-                                        {/* if there is a button in form, it will close the modal */}
-                                        <button className="btn btn-sm btn-circle hover:text-red-600 btn-ghost absolute left-2 top-2">
-                                            ✕
-                                        </button>
-                                    </form>
-                                    <h3 className="font-bold text-lg text-indigo-600">
-                                        سلامونه!
-                                    </h3>
-                                    <p className="py-4">
-                                        د ماډل بند کولو لپاره اسکپ یا د کراس
-                                        توکمه ووهئ
-                                        <br />
-                                        Press ESC key or click on ✕ button to
-                                        close
-                                    </p>
-                                </div>
-                            </dialog>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            <dialog id="MyModal" className="modal">
+                <div className="modal-box">
+                    <form method="dialog">
+                        {/* if there is a button in form, it will close the modal */}
+                        <button className="btn btn-sm btn-circle hover:text-red-600 btn-ghost absolute left-2 top-2">
+                            ✕
+                        </button>
+                    </form>
+                    <h3 className="font-bold text-lg text-indigo-600">
+                        سلامونه!
+                    </h3>
+                    <p className="py-4">
+                        د ماډل بند کولو لپاره اسکپ یا د کراس
+                        توکمه ووهئ
+                        <br />
+                        Press ESC key or click on ✕ button to
+                        close
+                    </p>
+                </div>
+            </dialog>
             <Pagination
                 links={expensesData.links}
                 currentPage={expensesData.currentPage}
