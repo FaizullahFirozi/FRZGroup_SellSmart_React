@@ -1,26 +1,11 @@
 import { Button } from "@/Components/Button";
 import Pagination from "@/Components/Pagination";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
-import { Head, Link, router, useForm } from "@inertiajs/react";
+import { Head, Link, useForm } from "@inertiajs/react";
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import { useConfirmDelete } from "@/hooks/useConfirmDelete";
-import { useTranslation } from "react-i18next";
-import LanguageSwitcher from "@/Components/LanguageSwitcher";
 
-export default function Index({ auth, companiesData, flash }) {
-    const { t, i18n } = useTranslation();
-    const {
-        data,
-        setData,
-        get,
-        delete: destroy,
-    } = useForm({
-        company_name: "",
-
-        page: companiesData.currentPage,
-    });
-
+export default function Index({ auth, companies, flash }) {
     useEffect(() => {
         if (flash.message.success) {
             toast.success(flash.message.success);
@@ -30,6 +15,11 @@ export default function Index({ auth, companiesData, flash }) {
         }
     }, [flash]);
 
+    const { data, setData, get } = useForm({
+        company_name: "",
+
+        page: companies.currentPage,
+    });
     const [typingTimeout, setTypingTimeout] = useState(null);
 
     const handleFilterChange = (e) => {
@@ -46,7 +36,7 @@ export default function Index({ auth, companiesData, flash }) {
         // Set a new timeout to send the request after 5 seconds
         setTypingTimeout(
             setTimeout(() => {
-                get(route("companies"), {
+                get(route("company"), {
                     preserveState: true,
                     company_name: data.company_name,
                     page: data.page,
@@ -55,108 +45,71 @@ export default function Index({ auth, companiesData, flash }) {
         );
     };
 
-    const { confirmDelete } = useConfirmDelete();
-
-    const handleDelete = (companyId) => {
-        confirmDelete(
-            "companies.destroy",
-            { id: companyId },
-            "شرکت په بریالی توګه ډیلیټ شو."
-        );
-    };
-
     return (
         <Authenticated user={auth.user} header={<h3>Companies List</h3>}>
             <Head title="Companies" />
-
             <ToastContainer className={"m-5"} />
-            <Link href={route("companies.create")}>
-                <button
-                    className="btn btn-dash btn-secondary rounded-full
-                "
-                >
-                    شرکت اضافه کړئ
-                </button>
+            <Link href={route("company.add")}>
+                <button className="btn btn-dash btn-secondary rounded-full
+                " >شرکت اضافه کړئ</button>
             </Link>
-            <input
-                className="input file-input-ghost"
-                type="text"
-                name="company_name"
-                value={data.company_name}
-                onChange={handleFilterChange}
-                placeholder="Search Here By Company Name"
-            />
-            <div className="join">
-                <div>
-                    <div>
-                        <input
-                            className="input join-item"
-                            placeholder="Search"
-                        />
-                    </div>
-                </div>
-                <select className="select join-item">
-                    <option disabled selected>
-                        Filter
-                    </option>
-                    <option>Sci-fi</option>
-                    <option>Drama</option>
-                    <option>Action</option>
-                </select>
-                <div className="indicator">
-                    <span className="indicator-item badge badge-secondary">
-                        new
-                    </span>
-                    <button className="btn join-item">Search</button>
-                </div>
-            </div>
-            
+                            <input
+                                className="input file-input-ghost"
+                                type="text"
+                                name="company_name"
+                                value={data.company_name}
+                                onChange={handleFilterChange}
+                                placeholder="Search Here By Company Name"
+                            />
+          
+
             <table className="min-w-full mt-5 border-collapse border border-gray-200 shadow-md">
                 <thead className="bg-gray-300">
+                  
                     <tr>
                         <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            {t("ID")}
+                            #
                         </th>
                         <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            {t("Company Name")}
+                            شرکت نوم
                         </th>
                         <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            {t("Company Address")}
+                            شرکت آدرس
                         </th>
                         <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            {t("Company Phone")}
+                            شرکت د اړیکې شمیره
                         </th>
                         <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            {t("Company Email")}
+                            شرکت ایمیل آدرس
                         </th>
                         <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            {t("Company Logo")}
+                            شرکت لوګو
                         </th>
                         <th className="border border-gray-400 px-4 py-2 font-bold text-gray-700">
-                            {t("General")}
+                            عمومي
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {companiesData.data.map((items) => (
+                    {companies.data.map((company) => (
                         <tr
-                            key={items.id}
+                            key={company.id}
                             className="odd:bg-white even:bg-gray-50"
                         >
                             <td className="border border-gray-300 px-4 py-2">
-                                {items.id}
+                                {company.id}
                             </td>
                             <td className="border border-gray-300 px-4 py-2">
-                                {items.company_name}
+                                {company.company_name}
                             </td>
                             <td className="border border-gray-300 px-4 py-2">
-                                {items.company_address}
+                                {company.company_address}
                             </td>
                             <td className="border border-gray-300 px-4 py-2">
-                                {items.company_phone}
+                                {company.company_phone}
                             </td>
                             <td className="border border-gray-300 px-4 py-2">
-                                {items.company_email}
+                                {company.company_email}
                             </td>
                             <td className="border border-gray-300 px-4 py-2">
                                 <div className=" avatar hover:cursor-pointer hover:opacity-80">
@@ -165,20 +118,22 @@ export default function Index({ auth, companiesData, flash }) {
                                             onClick={() =>
                                                 document
                                                     .getElementById(
-                                                        `modal_${items.id}`
+                                                        `modal_${company.id}`
                                                     ) // Use a unique id for each modal
                                                     .showModal()
                                             }
                                             alt="Logo"
                                             src={
-                                                "storage/" + items.company_logo
+                                                "storage/" +
+                                                company.company_logo
                                             }
                                         />
+                                        
                                     </div>
                                 </div>
-                                {/* یو ډیالوګ دی ګی کله په عکس کلیک وکړی دغه عکس غټ ښیی */}
+                               
                                 <dialog
-                                    id={`modal_${items.id}`}
+                                    id={`modal_${company.id}`}
                                     className="modal"
                                 >
                                     {" "}
@@ -187,7 +142,8 @@ export default function Index({ auth, companiesData, flash }) {
                                         <img
                                             alt="Company Logo"
                                             src={
-                                                "storage/" + items.company_logo
+                                                "storage/" +
+                                                company.company_logo
                                             }
                                         />
                                     </div>
@@ -200,9 +156,9 @@ export default function Index({ auth, companiesData, flash }) {
                                 </dialog>
                             </td>
                             <td className="border border-gray-300 px-4 py-2">
-                                <Link href={route("companies.edit", items.id)}>
+                                <Link href={route("company.edit", company.id)}>
                                     <button className="btn btn-xs rounded-full  btn-soft btn-accent btn-wide">
-                                        {t("Edit")}
+                                        Edit
                                     </button>
                                 </Link>
                                 <button
@@ -213,14 +169,13 @@ export default function Index({ auth, companiesData, flash }) {
                                     }
                                     className="btn btn-xs rounded-full  btn-dash btn-warning btn-wide"
                                 >
-                                    {t("Show")}
+                                    Show
                                 </button>
-                                <button
-                                    onClick={() => handleDelete(items.id)}
-                                    className="btn btn-xs rounded-full  btn-soft btn-secondary btn-wide"
-                                >
-                                    {t("Delete")}
-                                </button>
+                                <Link href={route("company.edit", company.id)}>
+                                    <button className="btn btn-xs rounded-full  btn-soft btn-secondary btn-wide">
+                                        Delete
+                                    </button>
+                                </Link>
                             </td>
                             <dialog id="MyModal" className="modal">
                                 <div className="modal-box">
@@ -247,8 +202,8 @@ export default function Index({ auth, companiesData, flash }) {
                 </tbody>
             </table>
             <Pagination
-                links={companiesData.links}
-                currentPage={companiesData.currentPage}
+                links={companies.links}
+                currentPage={companies.currentPage}
                 setCurrentPage={(page) => setData("page", page)}
             />
         </Authenticated>

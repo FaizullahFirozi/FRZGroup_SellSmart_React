@@ -3,8 +3,10 @@ import { Head, useForm } from "@inertiajs/react";
 import React, { useState } from "react";
 import TextInput from "@/Components/TextInput";
 import { BackButton } from "@/Components/BackButton";
+import { useTranslation } from "react-i18next";
 
 export default function Edit({ auth, companiesData }) {
+      const { t,i18n } = useTranslation();
     const { data, setData, put, errors } = useForm({
         id: companiesData.id,
         company_name: companiesData.company_name,
@@ -29,28 +31,31 @@ export default function Edit({ auth, companiesData }) {
             <Head title="Edit Company" />
             <form
                 onSubmit={submit}
-                className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md space-y-6"
+                className="mx-auto max-w-3xl bg-white p-6 rounded-lg shadow-md space-y-6"
             >
-                  <div className="flex w-full flex-col">
-                    <div className="divider divider-primary font-bold">د کمپني ټول مشخصات تغیر کول</div>
+                <div className="flex w-full flex-col">
+                    <div className="divider divider-primary font-bold">
+                        د کمپني ټول مشخصات تغیر کول
+                    </div>
                 </div>
                 <div>
                     <label
                         htmlFor="company_name"
                         className="block text-sm font-medium text-gray-700"
                     >
-                        Company Name
+                        { t("Company Name") }
                     </label>
                     <TextInput
                         autoFocus={true}
                         type="text"
                         placeholder="د شرکت نوم ولیکئ"
-                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        className="input-xl mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                         value={data.company_name}
                         onChange={(e) =>
                             setData("company_name", e.target.value)
                         }
                     />
+                   
                     {errors.company_name && (
                         <div className="text-sm text-red-600 mt-1">
                             {errors.company_name}
@@ -63,12 +68,13 @@ export default function Edit({ auth, companiesData }) {
                         htmlFor="company_address"
                         className="block text-sm font-medium text-gray-700"
                     >
-                        Company Address
+                        { t("Company Address") }
+
                     </label>
                     <TextInput
                         type="text"
                         placeholder="د شرکت ادرس ولیکئ"
-                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        className="input-xl mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                         value={data.company_address}
                         onChange={(e) =>
                             setData("company_address", e.target.value)
@@ -86,12 +92,13 @@ export default function Edit({ auth, companiesData }) {
                         htmlFor="company_email"
                         className="block text-sm font-medium text-gray-700"
                     >
-                        Company Email
+                        { t("Company Email") }
+
                     </label>
                     <TextInput
                         type="email"
                         placeholder="د شرکت ایمیل ولیکئ"
-                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        className="input-xl mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                         value={data.company_email}
                         onChange={(e) =>
                             setData("company_email", e.target.value)
@@ -109,12 +116,12 @@ export default function Edit({ auth, companiesData }) {
                         htmlFor="company_phone"
                         className="block text-sm font-medium text-gray-700"
                     >
-                        Company Phone
+                        { t("Company Phone") }
                     </label>
                     <TextInput
                         type="text"
                         placeholder="د شرکت د اړیکې شمیره ولیکئ"
-                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        className="input-lg mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                         value={data.company_phone}
                         onChange={(e) =>
                             setData("company_phone", e.target.value)
@@ -139,7 +146,8 @@ export default function Edit({ auth, companiesData }) {
                         htmlFor="company_logo"
                         className="block text-sm font-medium text-gray-700"
                     >
-                        Company Logo
+                        { t("Company Logo") }
+
                     </label>
                     <TextInput
                         type="file"
@@ -163,7 +171,7 @@ export default function Edit({ auth, companiesData }) {
                         disabled={loading} // Disable button when loading
                     >
                         {loading ? "تغیراتو په حال کي ..." : "تغیر کول"}
-                        </button>
+                    </button>
                     <BackButton className="btn-wide btn-sm btn-error" />
                 </div>
             </form>

@@ -1,24 +1,7 @@
-{{-- <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Laravel</title>
-        @viteReactRefresh 
-        @vite(['resources/css/app.css', 'resources/js/app.jsx'])
-        <!-- As you can see, we will use vite with jsx syntax for React-->
-        @inertiaHead
-    </head>
-    <body>
-        @inertia
-    </body>
-</html> --}}
-
-
-
 <!DOCTYPE html>
-<html dir="RTL" lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="light" class="light">
-    <head>
+    <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ in_array(app()->getLocale(), ['ps', 'dr']) ? 'ltr' : 'rtl' }}" data-theme="light" class="light">
+    
+<head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         

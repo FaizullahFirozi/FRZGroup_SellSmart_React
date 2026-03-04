@@ -11,7 +11,7 @@ export default function Sidebar({ children }) {
     const [expanded, setExpanded] = useState(false); // چی سایډبار بند وی
 
     return (
-        <aside className="h-screen">
+        <aside  className="h-screen">
             <nav className="h-full flex flex-col bg-white border-l shadow-sm">
                 <div className="p-4 pb-2 flex justify-between items-center">
                     <img

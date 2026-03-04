@@ -22,7 +22,7 @@ class CompanyController extends Controller
             $query->where('company_name', 'like', '%' . $request->company_name . '%');
         }
 
-        $result = $query->paginate(10);
+        $result = $query->paginate(1);
 
         return Inertia('Companies/Index', ['companiesData' => $result]);
     }

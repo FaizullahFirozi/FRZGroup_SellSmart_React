@@ -4,14 +4,12 @@ import React, { useState } from "react";
 import TextInput from "@/Components/TextInput";
 import PrimaryButton from "@/Components/PrimaryButton";
 import { BackButton } from "@/Components/BackButton";
-import { useTranslation } from "react-i18next";
 
 export default function Add({ auth }) {
-    const { t, i18n } = useTranslation();
     const { data, setData, post, errors } = useForm({
         company_name: "",
         company_address: "",
-        company_email: "",
+        contact_email: "",
         company_phone: "",
         company_logo: null,
     });
@@ -21,7 +19,7 @@ export default function Add({ auth }) {
     function submit(e) {
         e.preventDefault();
         setLoading(true); // Set loading to true
-        post(route("companies.store"), {
+        post(route("company.store"), {
             onFinish: () => setLoading(false), // Reset loading state after submission
         });
     }
@@ -33,17 +31,16 @@ export default function Add({ auth }) {
                 onSubmit={submit}
                 className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md space-y-6"
             >
+                
                 <div className="flex w-full flex-col">
-                    <div className="divider divider-success font-bold">
-                        د کمپني ټول مشخصات اضافه کول
-                    </div>
+                    <div className="divider divider-success">د کمپني ټول مشخصات اضافه کول</div>
                 </div>
                 <div>
                     <label
                         htmlFor="company_name"
                         className="block text-sm font-medium text-gray-700"
                     >
-                        {t("Company Name")}
+                        Company Name
                     </label>
                     <TextInput
                         autoFocus={true}
@@ -51,7 +48,7 @@ export default function Add({ auth }) {
                         type="text"
                         placeholder="د شرکت نوم ولیکئ"
                         minlength="3"
-                        className="input-xl validator mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        className="input validator mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                         value={data.company_name}
                         onChange={(e) =>
                             setData("company_name", e.target.value)
@@ -64,18 +61,18 @@ export default function Add({ auth }) {
                         </div>
                     )}
                 </div>
-                
+
                 <div>
                     <label
                         htmlFor="company_address"
                         className="block text-sm font-medium text-gray-700"
                     >
-                        {t("Company Address")}
+                        Company Address
                     </label>
                     <TextInput
                         type="text"
                         placeholder="د شرکت ادرس ولیکئ"
-                        className="input-xl mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                         value={data.company_address}
                         onChange={(e) =>
                             setData("company_address", e.target.value)
@@ -90,40 +87,39 @@ export default function Add({ auth }) {
 
                 <div>
                     <label
-                        htmlFor="company_email"
+                        htmlFor="contact_email"
                         className="block text-sm font-medium text-gray-700"
                     >
-                        {t("Company Email")}
+                        Company Email
                     </label>
                     <TextInput
                         type="email"
                         placeholder="د شرکت ایمیل ولیکئ"
                         required
-                        className="input-xl validator mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                        value={data.company_email}
+                        className="input validator mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        value={data.contact_email}
                         onChange={(e) =>
-                            setData("company_email", e.target.value)
+                            setData("contact_email", e.target.value)
                         }
                     />
-                    {errors.company_email && (
+                    {errors.contact_email && (
                         <div className="text-sm text-red-600 mt-1">
-                            {errors.company_email}
+                            {errors.contact_email}
                         </div>
                     )}
                 </div>
-             
 
                 <div>
                     <label
                         htmlFor="company_phone"
                         className="block text-sm font-medium text-gray-700"
                     >
-                        {t("Company Phone")}
+                        Company Phone
                     </label>
                     <TextInput
                         type="tel"
                         placeholder="د شرکت د اړیکې شمیره ولیکئ"
-                        className="input-xl validator tabular-nums mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        className="input validator tabular-nums mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                         pattern="[0-9]*"
                         minlength="10"
                         maxlength="10"
@@ -146,7 +142,7 @@ export default function Add({ auth }) {
                         htmlFor="company_logo"
                         className="block text-sm font-medium text-gray-700"
                     >
-                        د شرکت /{t("Company Logo")}
+                        د شرکت / کمپني لوګو
                     </label>
 
                     <TextInput
@@ -154,7 +150,7 @@ export default function Add({ auth }) {
                         onChange={(e) =>
                             setData("company_logo", e.target.files[0])
                         }
-                        className="file-input  w-full file-input-info"
+                        className="file-input w-full file-input-info"
                     />
 
                     {errors.company_logo && (
